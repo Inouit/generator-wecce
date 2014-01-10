@@ -1,0 +1,76 @@
+<T3DataStructure>
+	<meta>
+     	<langDisable>1</langDisable>
+  	</meta>
+  	<sheets>
+  		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:skinFlex/<%= validVariableName %>/locallang.xml:flexform.<%= validVariableName %>.sheets.general</sheetTitle>
+		        </TCEforms>
+				<type>array</type>
+				<el>
+					<images>
+						<section>1</section>
+						<type>array</type>
+						<el>
+							<image>
+								<type>array</type>
+								<tx_templavoila>
+									<title>LLL:EXT:skinFlex/<%= validVariableName %>/locallang.xml:flexform.<%= validVariableName %>.image</title>
+								</tx_templavoila>
+								<el>
+									<name>
+										<TCEforms>
+											<label>LLL:EXT:skinFlex/<%= validVariableName %>/locallang.xml:flexform.<%= validVariableName %>.title</label>
+											<config>
+												<type>input</type>
+											</config>
+										</TCEforms>
+									</name>
+									<file>
+										<TCEforms>
+											<label>LLL:EXT:skinFlex/<%= validVariableName %>/locallang.xml:flexform.<%= validVariableName %>.imageFile</label>
+											<config>
+												<type>group</type>
+												<internal_type>file</internal_type>
+												<allowed>gif,jpg,jpeg,tif,bmp,pcx,tga,png,pdf,ai</allowed>
+												<max_size>5000</max_size>
+												<uploadfolder>uploads/skinFlex/<%= validVariableName %></uploadfolder>
+												<maxitems>1</maxitems>
+												<size>1</size>
+												<selectedListStyle>width:200px</selectedListStyle>
+												<show_thumbs>1</show_thumbs>
+											</config>
+										</TCEforms>
+									</file>
+									<link>
+										<TCEforms>
+											<label>LLL:EXT:skinFlex/<%= validVariableName %>/locallang.xml:flexform.<%= validVariableName %>.link</label>
+											<config>
+												<type>input</type>
+												<size>15</size>
+												<wizards type="array">
+													<_PADDING type="integer">2</_PADDING>
+													<link type="array">
+														<type>popup</type>
+														<title>Link</title>
+														<icon>link_popup.gif</icon>
+														<script>browse_links.php?mode=wizard</script>
+														<JSopenParams>height=300,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
+													</link>
+												</wizards>
+											</config>
+										</TCEforms>
+									</link>
+								</el>
+							</image>
+						</el>
+					</images>
+				</el>
+			</ROOT>
+  		</sDEF>
+  	</sheets>
+</T3DataStructure>
+
+
