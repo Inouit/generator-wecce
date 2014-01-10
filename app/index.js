@@ -7,10 +7,6 @@ var _ = require('underscore.string');
 
 var WecceGenerator = module.exports = function WecceGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
-
-  this.on('end', function () {
-  });
-
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 };
 
@@ -56,8 +52,6 @@ WecceGenerator.prototype.app = function app() {
   this.template('_content.ts', this.componentName + '/content.ts');
   this.template('_flexform.xml', this.componentName + '/flexform.xml');
   this.template('_locallang.xml', this.componentName + '/locallang.xml');
-
-  // this.addWecce();
 
   this.copy('icon.gif', this.componentName + '/icon.gif');
   this.copy('wizard-icon.gif', this.componentName + '/wizard-icon.gif');
