@@ -1,8 +1,7 @@
 {
   "name": "generator-wecce",
-  "version": "0.0.1",
-  "description": "A generator for Yeoman which create a new WEC content element
-",
+  "version": "0.0.2",
+  "description": "A generator for Yeoman which create a new WEC content element",
   "keywords": [
     "yeoman-generator, typo3"
   ],
