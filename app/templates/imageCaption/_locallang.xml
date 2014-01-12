@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'wec_contentelements'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tt_content.<%= params.slugifiedContentName %>.title"><%= params.contentName %></label>
+			<label index="tt_content.<%= params.slugifiedContentName %>.description"><%= params.contentDescription %></label>
+
+			<label index="flexform.<%= params.slugifiedContentName %>.sheets.general">mainContent</label>
+			<label index="flexform.<%= params.slugifiedContentName %>.image">Image</label>
+			<label index="flexform.<%= params.slugifiedContentName %>.title">Caption</label>
+		</languageKey>
+
+		<languageKey index="fr" type="array">
+			<label index="tt_content.<%= params.slugifiedContentName %>.title">Image légendée</label>
+			<label index="tt_content.<%= params.slugifiedContentName %>.description"></label>
+
+			<label index="flexform.<%= params.slugifiedContentName %>.sheets.general">Contenu général</label>
+			<label index="flexform.<%= params.slugifiedContentName %>.image">Image</label>
+			<label index="flexform.<%= params.slugifiedContentName %>.title">Légende</label>
+		</languageKey>
+	</data>
+</T3locallang>
