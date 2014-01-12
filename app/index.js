@@ -34,6 +34,8 @@ WecceGenerator.prototype.askFor = function askFor() {
       new yeoman.inquirer.Separator(),
       { value:'clickToPlay', name:'Based on Click to Play Youtube video' },
       { value:'imageLegend', name:'Based on Image Caption' },
+      { value:'full', name:'Full content element' },
+      { value:'empty', name:'Empty content element' },
       new yeoman.inquirer.Separator(),
       { value:'exit', name:'Exit' },
     ]
@@ -64,6 +66,12 @@ WecceGenerator.prototype.switchAction = function switchAction() {
       break;
     case 'imageLegend':
       WecceGenerator.prototype._copyImageCaption(this);
+      break;
+    case 'full':
+      WecceGenerator.prototype._copyFull(this);
+      break;
+    case 'empty':
+      WecceGenerator.prototype._copyEmpty(this);
       break;
   }
 };
@@ -98,6 +106,38 @@ WecceGenerator.prototype._copyImageCaption = function _copyImageCaption(_this) {
   _this.template(from + '_flexform.xml', to + 'flexform.xml');
   _this.template(from + '_locallang.xml', to + 'locallang.xml');
   _this.template(from + 'assets/_style.css', to + 'assets/style.css');
+
+  _this.copy(from + 'icon.gif', to + '/icon.gif');
+  _this.copy(from + 'wizard-icon.gif', to + '/wizard-icon.gif');
+};
+
+WecceGenerator.prototype._copyFull = function _copyFull(_this) {
+  //extract params to this
+  var params = _this.params;
+  var from = params.action+'/';
+  var to = params.slugifiedContentName+'/';
+  _this.createDir = true;
+  _this.mkdir(params.slugifiedContentName+'/assets');
+
+  _this.template(from + '_content.ts', to + 'content.ts');
+  _this.template(from + '_flexform.xml', to + 'flexform.xml');
+  _this.template(from + '_locallang.xml', to + 'locallang.xml');
+  _this.template(from + 'assets/_full.js', to + 'assets/'+params.slugifiedContentName+'.js');
+  _this.template(from + 'assets/_style.css', to + 'assets/style.css');
+
+  _this.copy(from + 'icon.gif', to + '/icon.gif');
+  _this.copy(from + 'wizard-icon.gif', to + '/wizard-icon.gif');
+};
+
+WecceGenerator.prototype._copyEmpty = function _copyEmpty(_this) {
+  //extract params to this
+  var params = _this.params;
+  var from = params.action+'/';
+  var to = params.slugifiedContentName+'/';
+
+  _this.template(from + '_content.ts', to + 'content.ts');
+  _this.template(from + '_flexform.xml', to + 'flexform.xml');
+  _this.template(from + '_locallang.xml', to + 'locallang.xml');
 
   _this.copy(from + 'icon.gif', to + '/icon.gif');
   _this.copy(from + 'wizard-icon.gif', to + '/wizard-icon.gif');
