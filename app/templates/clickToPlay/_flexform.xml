@@ -1,0 +1,58 @@
+<T3DataStructure>
+  	<sheets>
+  		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:skinFlex/<%= params.slugifiedContentName %>/locallang.xml:flexform.<%= params.slugifiedContentName %>.sheets.general</sheetTitle>
+		        </TCEforms>
+				<type>array</type>
+				<el>
+					<title>
+						<TCEforms>
+							<label>LLL:EXT:skinFlex/<%= params.slugifiedContentName %>/locallang.xml:flexform.<%= params.slugifiedContentName %>.title</label>
+							<config>
+								<type>input</type>
+							</config>
+						</TCEforms>
+					</title>
+					<desc>
+						<TCEforms>
+							<label>LLL:EXT:skinFlex/<%= params.slugifiedContentName %>/locallang.xml:flexform.<%= params.slugifiedContentName %>.description</label>
+							<config>
+								<type>text</type>
+								<cols>50</cols>
+								<rows>5</rows>
+							</config>
+						</TCEforms>
+					</desc>
+					<file>
+						<TCEforms>
+							<label>LLL:EXT:skinFlex/<%= params.slugifiedContentName %>/locallang.xml:flexform.<%= params.slugifiedContentName %>.image</label>
+							<config>
+								<type>group</type>
+								<internal_type>file</internal_type>
+								<allowed>gif,jpg,jpeg,tif,bmp,pcx,tga,png,pdf,ai</allowed>
+								<max_size>5000</max_size>
+								<uploadfolder>uploads/skinFlex/<%= params.slugifiedContentName %>/</uploadfolder>
+								<maxitems>1</maxitems>
+								<size>1</size>
+								<selectedListStyle>width:200px</selectedListStyle>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</file>
+					<video>
+						<TCEforms>
+							<label>LLL:EXT:skinFlex/<%= params.slugifiedContentName %>/locallang.xml:flexform.<%= params.slugifiedContentName %>.video</label>
+							<config>
+								<type>input</type>
+							</config>
+						</TCEforms>
+					</video>
+				</el>
+			</ROOT>
+  		</sDEF>
+  	</sheets>
+</T3DataStructure>
+
+

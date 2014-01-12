@@ -1,0 +1,5 @@
+.<%= params.slugifiedContentName %>Bloc { display: inline-block; position: relative; }
+.<%= params.slugifiedContentName %>Bloc .infos { position: absolute; top: 80px; left: 0; right: 0; }
+.<%= params.slugifiedContentName %>Bloc h3 { margin : 10px 30px 10px 30px; }
+.<%= params.slugifiedContentName %>Bloc p { margin: 10px 30px 20px 30px; }
+.<%= params.slugifiedContentName %>Bloc .player { position: absolute; display: none; left: 0; top: 0; }
