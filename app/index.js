@@ -170,9 +170,21 @@ WecceGenerator.prototype._generateCustomLines =  function _generateCustomLines()
   		var line = lines[i];
 
 	    switch(line.type){
-	      case 'input':
-	        this._addInputLine(i, line);
-	        break;
+        case 'input':
+          this._addInputLine(i, line);
+          break;
+        case 'textarea':
+          this._addTextareaLine(i, line);
+          break;
+        case 'rte':
+          this._addRTELine(i, line);
+          break;
+        case 'image':
+          this._addImageLine(i, line);
+          break;
+        case 'loop':
+          this._addLoopLine(i, line);
+          break;
 	    }
   	}
 
@@ -187,9 +199,49 @@ WecceGenerator.prototype._addInputLine =  function _addInputLine(cpt, line){
   var params = this.params;
   var index = (parseInt(cpt)+1)*10;
 
-  this.files.content = this.files.content.replace("## // insert here", index+" = TEXT\n		"+index+"{\n			data = t3datastructure : pi_flexform->"+line.name+"\n		}\n\n		## // insert here");
-  this.files.flexform = this.files.flexform.replace("<!-- insert here -->", "<"+line.name+">\n						<TCEforms>\n							<label>LLL:EXT:skinFlex/"+params.slugifiedContentName+"/locallang.xml:flexform."+params.slugifiedContentName+"."+line.name+"</label>\n							<config>\n								<type>input</type>\n							</config>\n						</TCEforms>\n					</"+line.name+">\n					\n\n					<!-- insert here -->");
-  this.files.locallang = this.files.locallang.replace("<!-- insert here -->",	'<label index="flexform.'+params.slugifiedContentName+'.'+line.name+'"><![CDATA['+line.description+']]></label>\n			<!-- insert here -->');
+  this.files.content = this.files.content.replace("## // insert here", index+" = TEXT\n    "+index+"{\n      data = t3datastructure : pi_flexform->"+line.name+"\n    }\n\n    ## // insert here");
+  this.files.flexform = this.files.flexform.replace("<!-- insert here -->", "<"+line.name+">\n            <TCEforms>\n              <label>LLL:EXT:skinFlex/"+params.slugifiedContentName+"/locallang.xml:flexform."+params.slugifiedContentName+"."+line.name+"</label>\n              <config>\n                <type>input</type>\n              </config>\n            </TCEforms>\n          </"+line.name+">\n\n          <!-- insert here -->");
+  this.files.locallang = this.files.locallang.replace("<!-- insert here -->", '<label index="flexform.'+params.slugifiedContentName+'.'+line.name+'"><![CDATA['+line.description+']]></label>\n      <!-- insert here -->');
+
+};
+
+WecceGenerator.prototype._addTextareaLine =  function _addTextareaLine(cpt, line){
+  var params = this.params;
+  var index = (parseInt(cpt)+1)*10;
+
+  this.files.content = this.files.content.replace("## // insert here", index+" = TEXT\n    "+index+"{\n      data = t3datastructure : pi_flexform->"+line.name+"\n    }\n\n    ## // insert here");
+  this.files.flexform = this.files.flexform.replace("<!-- insert here -->", "<"+line.name+">\n            <TCEforms>\n              <label>LLL:EXT:skinFlex/"+params.slugifiedContentName+"/locallang.xml:flexform."+params.slugifiedContentName+"."+line.name+"</label>\n                <config>\n                  <type>text</type>\n                 <cols>50</cols>\n                 <rows>5</rows>\n                </config>\n            </TCEforms>\n          </"+line.name+">\n\n          <!-- insert here -->");
+  this.files.locallang = this.files.locallang.replace("<!-- insert here -->", '<label index="flexform.'+params.slugifiedContentName+'.'+line.name+'"><![CDATA['+line.description+']]></label>\n      <!-- insert here -->');
+
+};
+
+WecceGenerator.prototype._addRTELine =  function _addRTELine(cpt, line){
+  var params = this.params;
+  var index = (parseInt(cpt)+1)*10;
+
+  this.files.content = this.files.content.replace("## // insert here", index+" = TEXT\n    "+index+"{\n      data = t3datastructure : pi_flexform->"+line.name+"\n      stdWrap.parseFunc < lib.parseFunc_RTE\n    }\n\n    ## // insert here");
+  this.files.flexform = this.files.flexform.replace("<!-- insert here -->", "<"+line.name+">\n            <TCEforms>\n              <label>LLL:EXT:skinFlex/"+params.slugifiedContentName+"/locallang.xml:flexform."+params.slugifiedContentName+"."+line.name+"</label>\n                <config>\n                  <type>text</type>\n                 <cols>50</cols>\n                 <rows>5</rows>\n                </config>\n                <defaultExtras>richtext[*]:rte_transform[mode=ts_css]</defaultExtras>\n            </TCEforms>\n          </"+line.name+">\n\n          <!-- insert here -->");
+  this.files.locallang = this.files.locallang.replace("<!-- insert here -->", '<label index="flexform.'+params.slugifiedContentName+'.'+line.name+'"><![CDATA['+line.description+']]></label>\n      <!-- insert here -->');
+
+};
+
+WecceGenerator.prototype._addImageLine =  function _addImageLine(cpt, line){
+  var params = this.params;
+  var index = (parseInt(cpt)+1)*10;
+
+  this.files.content = this.files.content.replace("## // insert here", index+" = IMAGE\n    "+index+"{\n      file.import.data = t3datastructure : pi_flexform->"+line.name+"\n      file.import.wrap = uploads/skinFlex/"+params.slugifiedContentName+"/\n    }\n\n    ## // insert here");
+  this.files.flexform = this.files.flexform.replace("<!-- insert here -->", "<"+line.name+">\n            <TCEforms>\n              <label>LLL:EXT:skinFlex/"+params.slugifiedContentName+"/locallang.xml:flexform."+params.slugifiedContentName+"."+line.name+"</label>\n              <config>\n                <type>group</type>\n                <internal_type>file</internal_type>\n                <allowed>gif,jpg,jpeg,tif,bmp,pcx,tga,png,pdf,ai</allowed>\n                <max_size>5000</max_size>\n                <uploadfolder>uploads/skinFlex/"+params.slugifiedContentName+"/</uploadfolder>\n                <maxitems>1</maxitems>\n                <size>1</size>\n                <selectedListStyle>width:200px</selectedListStyle>\n                <show_thumbs>1</show_thumbs>\n              </config>\n            </TCEforms>\n          </"+line.name+">\n\n          <!-- insert here -->");
+  this.files.locallang = this.files.locallang.replace("<!-- insert here -->", '<label index="flexform.'+params.slugifiedContentName+'.'+line.name+'"><![CDATA['+line.description+']]></label>\n      <!-- insert here -->');
+
+};
+
+WecceGenerator.prototype._addLoopLine =  function _addLoopLine(cpt, line){
+  var params = this.params;
+  var index = (parseInt(cpt)+1)*10;
+
+  this.files.content = this.files.content.replace("## // insert here", index+" = FFSECTION\n    "+index+" {\n      rootPath = t3datastructure : pi_flexform->"+line.name+"s/el    \n      10 = COA\n      10{\n        #flexformSection : "+line.name+"/el/"+line.name+"\n      }\n    }\n\n    ## // insert here");
+  this.files.flexform = this.files.flexform.replace("<!-- insert here -->", "<"+line.name+"s>\n            <section>1</section>\n            <type>array</type>\n            <el>\n              <"+line.name+">\n                <type>array</type>\n                <tx_templavoila>\n                  <title>LLL:EXT:skinFlex/"+params.slugifiedContentName+"/locallang.xml:flexform."+params.slugifiedContentName+"."+line.name+"</title>\n                </tx_templavoila>\n                <el>\n                </el>\n              </"+line.name+">\n            </el>\n          </"+line.name+"s>\n\n          <!-- insert here -->");
+  this.files.locallang = this.files.locallang.replace("<!-- insert here -->", '<label index="flexform.'+params.slugifiedContentName+'.'+line.name+'"><![CDATA['+line.description+']]></label>\n      <!-- insert here -->');
 
 };
 
@@ -262,26 +314,26 @@ WecceGenerator.prototype._copyEmpty = function _copyEmpty() {
 
 
 WecceGenerator.prototype.addWecce = function addWecce() {
-  // var ext_tables = this.readFileAsString('ext_tables.php');
-  // var ext_localconf = this.readFileAsString('ext_localconf.php');
+  var ext_tables = this.readFileAsString('ext_tables.php');
+  var ext_localconf = this.readFileAsString('ext_localconf.php');
 
-  // ext_tables = ext_tables.replace("// ## insert here", "ux_tx_weccontentelements_lib::addContentElement($_EXTKEY, '"+this.params.slugifiedContentName+"');\n // ## insert here");
-  // this.write('ext_tables.php',ext_tables);
+  ext_tables = ext_tables.replace("// ## insert here", "ux_tx_weccontentelements_lib::addContentElement($_EXTKEY, '"+this.params.slugifiedContentName+"');\n // ## insert here");
+  this.write('ext_tables.php',ext_tables);
 
-  // ext_localconf = ext_localconf.replace("// ## insert here", "tx_weccontentelements_lib::addTyposcript($_EXTKEY, '"+this.params.slugifiedContentName+"');\n // ## insert here");
-  // this.write('ext_localconf.php',ext_localconf);
+  ext_localconf = ext_localconf.replace("// ## insert here", "tx_weccontentelements_lib::addTyposcript($_EXTKEY, '"+this.params.slugifiedContentName+"');\n // ## insert here");
+  this.write('ext_localconf.php',ext_localconf);
 
-  // if (this.createDir) {
-  //  var ext_emconf = this.readFileAsString('ext_emconf.php');
-  //  var matches = ext_emconf.match(/'createDirs' => '([a-zA-Z0-9,\/ ]*)'/g)
-  //  if (matches) {
-  //    if(matches[0].length < 30) {
-  //      ext_emconf = ext_emconf.replace(/'createDirs' => '([a-zA-Z0-9,\/ ]*)'/g,  "'createDirs' => 'uploads/skinFlex/"+this.params.slugifiedContentName+"/'");
-  //    }else {
-  //      ext_emconf = ext_emconf.replace(/'createDirs' => '([a-zA-Z0-9,\/ ]*)'/g,  "'createDirs' => '$1, uploads/skinFlex/"+this.params.slugifiedContentName+"/'");
-  //    }
+  if (this.createDir) {
+   var ext_emconf = this.readFileAsString('ext_emconf.php');
+   var matches = ext_emconf.match(/'createDirs' => '([a-zA-Z0-9,\/ ]*)'/g)
+   if (matches) {
+     if(matches[0].length < 30) {
+       ext_emconf = ext_emconf.replace(/'createDirs' => '([a-zA-Z0-9,\/ ]*)'/g,  "'createDirs' => 'uploads/skinFlex/"+this.params.slugifiedContentName+"/'");
+     }else {
+       ext_emconf = ext_emconf.replace(/'createDirs' => '([a-zA-Z0-9,\/ ]*)'/g,  "'createDirs' => '$1, uploads/skinFlex/"+this.params.slugifiedContentName+"/'");
+     }
 
-  //    this.write('ext_emconf.php',ext_emconf);
-  //  }
-  // }
+     this.write('ext_emconf.php',ext_emconf);
+   }
+  }
 }
