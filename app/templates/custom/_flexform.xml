@@ -1,0 +1,17 @@
+<T3DataStructure>
+    <sheets>
+      <sDEF>
+      <ROOT>
+        <TCEforms>
+          <sheetTitle>LLL:EXT:skinFlex/<%= params.slugifiedContentName %>/locallang.xml:flexform.<%= params.slugifiedContentName %>.sheets.general</sheetTitle>
+            </TCEforms>
+        <type>array</type>
+        <el>
+          <!-- insert here -->
+        </el>
+      </ROOT>
+      </sDEF>
+    </sheets>
+</T3DataStructure>
+
+
