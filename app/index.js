@@ -170,9 +170,21 @@ WecceGenerator.prototype._generateCustomLines =  function _generateCustomLines()
   		var line = lines[i];
 
 	    switch(line.type){
-	      case 'input':
-	        this._addInputLine(i, line);
-	        break;
+        case 'input':
+          this._addInputLine(i, line);
+          break;
+        case 'textarea':
+          this._addTextareaLine(i, line);
+          break;
+        case 'rte':
+          this._addRTELine(i, line);
+          break;
+        case 'image':
+          this._addImageLine(i, line);
+          break;
+        case 'loop':
+          this._addLoopLine(i, line);
+          break;
 	    }
   	}
 
@@ -187,9 +199,49 @@ WecceGenerator.prototype._addInputLine =  function _addInputLine(cpt, line){
   var params = this.params;
   var index = (parseInt(cpt)+1)*10;
 
-  this.files.content = this.files.content.replace("## // insert here", index+" = TEXT\n		"+index+"{\n			data = t3datastructure : pi_flexform->"+line.name+"\n		}\n\n		## // insert here");
-  this.files.flexform = this.files.flexform.replace("<!-- insert here -->", "<"+line.name+">\n						<TCEforms>\n							<label>LLL:EXT:skinFlex/"+params.slugifiedContentName+"/locallang.xml:flexform."+params.slugifiedContentName+"."+line.name+"</label>\n							<config>\n								<type>input</type>\n							</config>\n						</TCEforms>\n					</"+line.name+">\n					\n\n					<!-- insert here -->");
-  this.files.locallang = this.files.locallang.replace("<!-- insert here -->",	'<label index="flexform.'+params.slugifiedContentName+'.'+line.name+'"><![CDATA['+line.description+']]></label>\n			<!-- insert here -->');
+  this.files.content = this.files.content.replace("## // insert here", index+" = TEXT\n    "+index+"{\n      data = t3datastructure : pi_flexform->"+line.name+"\n    }\n\n    ## // insert here");
+  this.files.flexform = this.files.flexform.replace("<!-- insert here -->", "<"+line.name+">\n            <TCEforms>\n              <label>LLL:EXT:skinFlex/"+params.slugifiedContentName+"/locallang.xml:flexform."+params.slugifiedContentName+"."+line.name+"</label>\n              <config>\n                <type>input</type>\n              </config>\n            </TCEforms>\n          </"+line.name+">\n\n          <!-- insert here -->");
+  this.files.locallang = this.files.locallang.replace("<!-- insert here -->", '<label index="flexform.'+params.slugifiedContentName+'.'+line.name+'"><![CDATA['+line.description+']]></label>\n      <!-- insert here -->');
+
+};
+
+WecceGenerator.prototype._addTextareaLine =  function _addTextareaLine(cpt, line){
+  var params = this.params;
+  var index = (parseInt(cpt)+1)*10;
+
+  this.files.content = this.files.content.replace("## // insert here", index+" = TEXT\n    "+index+"{\n      data = t3datastructure : pi_flexform->"+line.name+"\n    }\n\n    ## // insert here");
+  this.files.flexform = this.files.flexform.replace("<!-- insert here -->", "<"+line.name+">\n            <TCEforms>\n              <label>LLL:EXT:skinFlex/"+params.slugifiedContentName+"/locallang.xml:flexform."+params.slugifiedContentName+"."+line.name+"</label>\n                <config>\n                  <type>text</type>\n                 <cols>50</cols>\n                 <rows>5</rows>\n                </config>\n            </TCEforms>\n          </"+line.name+">\n\n          <!-- insert here -->");
+  this.files.locallang = this.files.locallang.replace("<!-- insert here -->", '<label index="flexform.'+params.slugifiedContentName+'.'+line.name+'"><![CDATA['+line.description+']]></label>\n      <!-- insert here -->');
+
+};
+
+WecceGenerator.prototype._addRTELine =  function _addRTELine(cpt, line){
+  var params = this.params;
+  var index = (parseInt(cpt)+1)*10;
+
+  this.files.content = this.files.content.replace("## // insert here", index+" = TEXT\n    "+index+"{\n      data = t3datastructure : pi_flexform->"+line.name+"\n      stdWrap.parseFunc < lib.parseFunc_RTE\n    }\n\n    ## // insert here");
+  this.files.flexform = this.files.flexform.replace("<!-- insert here -->", "<"+line.name+">\n            <TCEforms>\n              <label>LLL:EXT:skinFlex/"+params.slugifiedContentName+"/locallang.xml:flexform."+params.slugifiedContentName+"."+line.name+"</label>\n                <config>\n                  <type>text</type>\n                 <cols>50</cols>\n                 <rows>5</rows>\n                </config>\n                <defaultExtras>richtext[*]:rte_transform[mode=ts_css]</defaultExtras>\n            </TCEforms>\n          </"+line.name+">\n\n          <!-- insert here -->");
+  this.files.locallang = this.files.locallang.replace("<!-- insert here -->", '<label index="flexform.'+params.slugifiedContentName+'.'+line.name+'"><![CDATA['+line.description+']]></label>\n      <!-- insert here -->');
+
+};
+
+WecceGenerator.prototype._addImageLine =  function _addImageLine(cpt, line){
+  var params = this.params;
+  var index = (parseInt(cpt)+1)*10;
+
+  this.files.content = this.files.content.replace("## // insert here", index+" = IMAGE\n    "+index+"{\n      file.import.data = t3datastructure : pi_flexform->"+line.name+"\n      file.import.wrap = uploads/skinFlex/"+params.slugifiedContentName+"/\n    }\n\n    ## // insert here");
+  this.files.flexform = this.files.flexform.replace("<!-- insert here -->", "<"+line.name+">\n            <TCEforms>\n              <label>LLL:EXT:skinFlex/"+params.slugifiedContentName+"/locallang.xml:flexform."+params.slugifiedContentName+"."+line.name+"</label>\n              <config>\n                <type>group</type>\n                <internal_type>file</internal_type>\n                <allowed>gif,jpg,jpeg,tif,bmp,pcx,tga,png,pdf,ai</allowed>\n                <max_size>5000</max_size>\n                <uploadfolder>uploads/skinFlex/"+params.slugifiedContentName+"/</uploadfolder>\n                <maxitems>1</maxitems>\n                <size>1</size>\n                <selectedListStyle>width:200px</selectedListStyle>\n                <show_thumbs>1</show_thumbs>\n              </config>\n            </TCEforms>\n          </"+line.name+">\n\n          <!-- insert here -->");
+  this.files.locallang = this.files.locallang.replace("<!-- insert here -->", '<label index="flexform.'+params.slugifiedContentName+'.'+line.name+'"><![CDATA['+line.description+']]></label>\n      <!-- insert here -->');
+
+};
+
+WecceGenerator.prototype._addLoopLine =  function _addLoopLine(cpt, line){
+  var params = this.params;
+  var index = (parseInt(cpt)+1)*10;
+
+  this.files.content = this.files.content.replace("## // insert here", index+" = FFSECTION\n    "+index+" {\n      rootPath = t3datastructure : pi_flexform->"+line.name+"s/el    \n      10 = COA\n      10{\n        #flexformSection : "+line.name+"/el/"+line.name+"\n      }\n    }\n\n    ## // insert here");
+  this.files.flexform = this.files.flexform.replace("<!-- insert here -->", "<"+line.name+"s>\n            <section>1</section>\n            <type>array</type>\n            <el>\n              <"+line.name+">\n                <type>array</type>\n                <tx_templavoila>\n                  <title>LLL:EXT:skinFlex/"+params.slugifiedContentName+"/locallang.xml:flexform."+params.slugifiedContentName+"."+line.name+"</title>\n                </tx_templavoila>\n                <el>\n                </el>\n              </"+line.name+">\n            </el>\n          </"+line.name+"s>\n\n          <!-- insert here -->");
+  this.files.locallang = this.files.locallang.replace("<!-- insert here -->", '<label index="flexform.'+params.slugifiedContentName+'.'+line.name+'"><![CDATA['+line.description+']]></label>\n      <!-- insert here -->');
 
 };
 
