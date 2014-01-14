@@ -99,12 +99,12 @@ WecceGenerator.prototype._initCustom = function _initCustom() {
 	  _this.files.flexform = _this.readFileAsString(to + 'flexform.xml');
 	  _this.files.locallang = _this.readFileAsString(to + 'locallang.xml');
 
-      done(_this);
+    done(_this);
   });
 };
 
 WecceGenerator.prototype._promptCustom = function _promptCustom(_this) {
-  var cb = _this.async();
+  // var cb = this.async();
   var newLine = [
   {
     name: 'customLine',
@@ -127,12 +127,12 @@ WecceGenerator.prototype._promptCustom = function _promptCustom(_this) {
     }else{
       _this._addCustomLine(props.customLine);
     }
-    cb();
+    // cb();
   }.bind(_this));
 };
 
 WecceGenerator.prototype._addCustomLine = function _addCustomLine(lineType){
-  var cb = this.async();
+  // var cb = this.async();
 
   var prompts = [
   {
@@ -155,7 +155,7 @@ WecceGenerator.prototype._addCustomLine = function _addCustomLine(lineType){
         });
 
     this._promptCustom(this);
-    cb();
+    // cb();
   }.bind(this));
 };
 
