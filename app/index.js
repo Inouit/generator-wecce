@@ -33,7 +33,7 @@ WecceGenerator.prototype.askFor = function askFor() {
       { value:'custom', name:'Create a custom content element' },
       new yeoman.inquirer.Separator(),
       { value:'clickToPlay', name:'Based on Click to Play Youtube video' },
-      { value:'imageLegend', name:'Based on Image Caption' },
+      { value:'imageCaption', name:'Based on Image Caption' },
       { value:'full', name:'Full content element' },
       { value:'empty', name:'Empty content element' },
       new yeoman.inquirer.Separator(),
@@ -61,7 +61,7 @@ WecceGenerator.prototype.switchAction = function switchAction() {
     case 'clickToPlay':
       this._copyClickToPlay();
       break;
-    case 'imageLegend':
+    case 'imageCaption':
       this._copyImageCaption();
       break;
     case 'full':
@@ -187,11 +187,6 @@ WecceGenerator.prototype._generateCustomLines =  function _generateCustomLines()
           break;
 	    }
   	}
-
-  	// write files
-  // 	this.write(to + 'content.ts', this.files.content);
-		// this.write(to + 'flexform.xml', this.files.flexform);
-		// this.write(to + 'locallang.xml', this.files.locallang);
 	}
 
   this._addWecce();
@@ -263,6 +258,9 @@ WecceGenerator.prototype._copyClickToPlay = function _copyClickToPlay() {
 
   this.copy(from + 'icon.gif', to + '/icon.gif');
   this.copy(from + 'wizard-icon.gif', to + '/wizard-icon.gif');
+
+  this._addWecce();
+
 };
 
 WecceGenerator.prototype._copyImageCaption = function _copyImageCaption() {
@@ -280,6 +278,9 @@ WecceGenerator.prototype._copyImageCaption = function _copyImageCaption() {
 
   this.copy(from + 'icon.gif', to + '/icon.gif');
   this.copy(from + 'wizard-icon.gif', to + '/wizard-icon.gif');
+
+  this._addWecce();
+
 };
 
 WecceGenerator.prototype._copyFull = function _copyFull() {
@@ -298,6 +299,9 @@ WecceGenerator.prototype._copyFull = function _copyFull() {
 
   this.copy(from + 'icon.gif', to + '/icon.gif');
   this.copy(from + 'wizard-icon.gif', to + '/wizard-icon.gif');
+
+  this._addWecce();
+
 };
 
 WecceGenerator.prototype._copyEmpty = function _copyEmpty() {
@@ -312,6 +316,9 @@ WecceGenerator.prototype._copyEmpty = function _copyEmpty() {
 
   this.copy(from + 'icon.gif', to + '/icon.gif');
   this.copy(from + 'wizard-icon.gif', to + '/wizard-icon.gif');
+
+  this._addWecce();
+
 };
 
 
@@ -323,7 +330,7 @@ WecceGenerator.prototype._addWecce = function _addWecce() {
   var ext_tables = this.readFileAsString('ext_tables.php');
   var ext_localconf = this.readFileAsString('ext_localconf.php');
 
-  if(this.files.content) {
+  if(this.files && this.files.content) {
     // write files
     this.write(to + 'content.ts', this.files.content);
     this.write(to + 'flexform.xml', this.files.flexform);
