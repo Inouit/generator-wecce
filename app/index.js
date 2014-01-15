@@ -80,7 +80,7 @@ WecceGenerator.prototype._initCustom = function _initCustom() {
   var params = this.params;
   var from = params.action+'/';
   var to = params.slugifiedContentName+'/';
-  var done = this._promptCustom;
+  // var done = this._promptCustom;
   var _this = this;
 
   //copy default files
@@ -99,7 +99,7 @@ WecceGenerator.prototype._initCustom = function _initCustom() {
 	  _this.files.flexform = _this.readFileAsString(to + 'flexform.xml');
 	  _this.files.locallang = _this.readFileAsString(to + 'locallang.xml');
 
-      done(_this);
+    _this._promptCustom(_this);
   });
 };
 
@@ -189,10 +189,12 @@ WecceGenerator.prototype._generateCustomLines =  function _generateCustomLines()
   	}
 
   	// write files
-  	this.write(to + 'content.ts', this.files.content);
-		this.write(to + 'flexform.xml', this.files.flexform);
-		this.write(to + 'locallang.xml', this.files.locallang);
+  // 	this.write(to + 'content.ts', this.files.content);
+		// this.write(to + 'flexform.xml', this.files.flexform);
+		// this.write(to + 'locallang.xml', this.files.locallang);
 	}
+
+  this._addWecce();
 };
 
 WecceGenerator.prototype._addInputLine =  function _addInputLine(cpt, line){
@@ -313,9 +315,20 @@ WecceGenerator.prototype._copyEmpty = function _copyEmpty() {
 };
 
 
-WecceGenerator.prototype.addWecce = function addWecce() {
+WecceGenerator.prototype._addWecce = function _addWecce() {
+  //extract params to this
+  var params = this.params;
+  var from = params.action+'/';
+  var to = params.slugifiedContentName+'/';
   var ext_tables = this.readFileAsString('ext_tables.php');
   var ext_localconf = this.readFileAsString('ext_localconf.php');
+
+  if(this.files.content) {
+    // write files
+    this.write(to + 'content.ts', this.files.content);
+    this.write(to + 'flexform.xml', this.files.flexform);
+    this.write(to + 'locallang.xml', this.files.locallang);
+  }
 
   ext_tables = ext_tables.replace("// ## insert here", "ux_tx_weccontentelements_lib::addContentElement($_EXTKEY, '"+this.params.slugifiedContentName+"');\n // ## insert here");
   this.write('ext_tables.php',ext_tables);
