@@ -19,8 +19,7 @@ WecceGenerator.prototype.askFor = function askFor() {
   var prompts = [
   {
     name: 'contentName',
-    message: "What's the name of your content element?",
-    default: 'Test FCE'
+    message: "What's the name of your content element?"
   },
   {
     name: 'contentDescription',
