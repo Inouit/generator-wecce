@@ -225,6 +225,7 @@ WecceGenerator.prototype._addRTELine =  function _addRTELine(cpt, line){
 WecceGenerator.prototype._addImageLine =  function _addImageLine(cpt, line){
   var params = this.params;
   var index = (parseInt(cpt)+1)*10;
+  this.createDir = true;
 
   this.files.content = this.files.content.replace("## // insert here", index+" = IMAGE\n    "+index+"{\n      file.import.data = t3datastructure : pi_flexform->"+line.name+"\n      file.import.wrap = uploads/skinFlex/"+params.slugifiedContentName+"/\n    }\n\n    ## // insert here");
   this.files.flexform = this.files.flexform.replace("<!-- insert here -->", "<"+line.name+">\n            <TCEforms>\n              <label>LLL:EXT:skinFlex/"+params.slugifiedContentName+"/locallang.xml:flexform."+params.slugifiedContentName+"."+line.name+"</label>\n              <config>\n                <type>group</type>\n                <internal_type>file</internal_type>\n                <allowed>gif,jpg,jpeg,tif,bmp,pcx,tga,png,pdf,ai</allowed>\n                <max_size>5000</max_size>\n                <uploadfolder>uploads/skinFlex/"+params.slugifiedContentName+"/</uploadfolder>\n                <maxitems>1</maxitems>\n                <size>1</size>\n                <selectedListStyle>width:200px</selectedListStyle>\n                <show_thumbs>1</show_thumbs>\n              </config>\n            </TCEforms>\n          </"+line.name+">\n\n          <!-- insert here -->");
