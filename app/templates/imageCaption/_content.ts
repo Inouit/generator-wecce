@@ -2,7 +2,7 @@ tt_content.<%= params.slugifiedContentName %> = COA
 tt_content.<%= params.slugifiedContentName %> {
 	1 = HEADERDATA
 	1.value (
-		<link rel="stylesheet" type="text/css" href="typo3conf/ext/skinFlex/<%= params.slugifiedContentName %>/res/style.css" media="all">
+		<link rel="stylesheet" type="text/css" href="typo3conf/ext/skinFlex/<%= params.slugifiedContentName %>/assets/style.css" media="all">
 	)
 
 	5 = < lib.stdheader
