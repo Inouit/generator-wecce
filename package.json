@@ -1,21 +1,21 @@
 {
   "name": "generator-wecce",
-  "version": "0.0.2",
+  "version": "0.2.0",
   "description": "A generator for Yeoman which create a new WEC content element",
   "keywords": [
     "yeoman-generator, typo3"
   ],
-  "homepage": "https://github.com/in8/generator-wecce",
-  "bugs": "https://github.com/in8/generator-wecce/issues",
+  "homepage": "https://github.com/Inouit/generator-wecce",
+  "bugs": "https://github.com/Inouit/generator-wecce/issues",
   "author": {
     "name": "Inouit",
     "email": "",
-    "url": "https://github.com/in8"
+    "url": "https://github.com/Inouit"
   },
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/in8/generator-wecce.git"
+    "url": "git://github.com/Inouit/generator-wecce.git"
   },
   "scripts": {
     "test": "mocha"
